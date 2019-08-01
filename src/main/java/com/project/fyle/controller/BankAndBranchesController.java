@@ -29,4 +29,14 @@ public class BankAndBranchesController {
 		return new ResponseEntity<Object>("Error Occured", HttpStatus.INTERNAL_SERVER_ERROR);
 	}		
 	}
+	
+	@GetMapping("/BankDetailsWithCity")
+	public ResponseEntity<Object> BankDetailsBankDetailsWithCity(@RequestParam(name="name") String name,@RequestParam(name="city") String city,@RequestParam(name = "offset") long offset,@RequestParam(name = "limit") long limit) {
+	try {
+		PagedResult<BankBranches> resultList=banksAndBranchesService.getBankDetails(name,city,offset,limit);
+	return new ResponseEntity<Object>(resultList, HttpStatus.OK);
+	}catch(Exception e) {
+		return new ResponseEntity<Object>("Error Occured", HttpStatus.INTERNAL_SERVER_ERROR);
+	}		
+	}
 }

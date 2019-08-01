@@ -18,7 +18,12 @@ public class BanksAndBranchesServiceImpl implements BanksAndBranchesService {
 	@Override
 	public PagedResult<BankBranches> getBankDetails(String iFSCcode, long offset,long limit) {
 		List<BankBranches> resultList= banksAndBranchesRepository.getBankDetails(iFSCcode, offset, limit);
-		return new PagedResult<BankBranches>(resultList,offset,limit,resultList.size());
+		return new PagedResult<BankBranches>(resultList,resultList.size(),limit,offset);
 	    }
+	@Override
+	public PagedResult<BankBranches> getBankDetails(String name, String city, long offset, long limit) {
+		List<BankBranches> resultList= banksAndBranchesRepository.getBankDetails(name,city, offset, limit);
+		return new PagedResult<BankBranches>(resultList,resultList.size(),limit,offset);
+	}
 
 }

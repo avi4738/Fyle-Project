@@ -5,14 +5,14 @@ import java.util.List;
 public class PagedResult<T> {
     public static final long DEFAULT_OFFSET = 0;
     public static final int DEFAULT_MAX_NO_OF_ROWS = 100;
-    private int offset;
-    private int limit;
+    private long offset;
+    private long  limit;
     private long totalElements;
     private List<T> elements;
-    public PagedResult(List<T> elements, long totalElements, long limit2, int limit) {
+    public PagedResult(List<T> elements, long totalElements, long limit, long offset) {
         this.elements = elements;
         this.totalElements = totalElements;
-        this.offset = (int) limit2;
+        this.offset =  offset;
         this.limit = limit;
     }
     public boolean hasMore() {
@@ -24,10 +24,10 @@ public class PagedResult<T> {
     public long getTotalElements() {
         return totalElements;
     }
-    public int  getOffset() {
+    public long  getOffset() {
         return offset;
     }
-    public int getLimit() {
+    public long getLimit() {
         return limit;
     }
     public List<T> getElements() {

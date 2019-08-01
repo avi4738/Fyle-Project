@@ -9,4 +9,6 @@ public interface BanksAndBranchesService {
 
 	PagedResult<BankBranches> getBankDetails(String iFSCcode, long offset, long limit);
 
+	PagedResult<BankBranches> getBankDetails(String name, String city, long offset, long limit);
+
 }
