@@ -11,7 +11,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenAuthenticationService {
-    private long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
+    private long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 5; // 10 days
     private String secret = "ThisIsASecret";
     private String tokenPrefix = "Bearer";
     private String headerString = "Authorization";

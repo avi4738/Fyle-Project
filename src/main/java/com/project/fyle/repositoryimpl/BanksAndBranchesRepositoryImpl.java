@@ -1,6 +1,5 @@
 package com.project.fyle.repositoryimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,12 +19,12 @@ public class BanksAndBranchesRepositoryImpl implements BanksAndBranchesRepositor
 		@Override
 		public List<BankBranches> getBankDetails(String IFSCcode, long offset, long limit) {
 	    	System.out.println("inside repo");
-	        String query = "Select * from bank_branches where ifsc= '"+"ABHY0065056"+"'";
+	        String query = "Select * from bank_branches where ifsc= :ifsc";
 	        		/*"Select * from bank_branches "
 	                + "where  ifsc = '"+IFSCcode+"'";*/
 	        Query nativeQuery = em.createNativeQuery(query);
 	        //Paginering
-	        //nativeQuery.setParameter("somethingElseId", "ABHY0065056");
+	        nativeQuery.setParameter("ifsc", IFSCcode);
 	        nativeQuery.setFirstResult((int) offset);
 	        nativeQuery.setMaxResults((int) limit);
 	        List<BankBranches> resultList = nativeQuery.getResultList();
@@ -34,17 +33,16 @@ public class BanksAndBranchesRepositoryImpl implements BanksAndBranchesRepositor
 		}
 		@Override
 		public List<BankBranches> getBankDetails(String name, String city, long offset, long limit) {
-			System.out.println("inside repo");
-	        String query = "Select * from bank_branches where city= '"+city+"'";
-	        		/*"Select * from bank_branches "
-	                + "where  ifsc = '"+IFSCcode+"'";*/
+			System.out.println("inside repo"+city);
+	        String query = "Select * from bank_branches where city= :city AND bank_name= :name";
 	        Query nativeQuery = em.createNativeQuery(query);
 	        //Paginering
-	        //nativeQuery.setParameter("name", name);
-	        //nativeQuery.setParameter("sec", city);
+	        nativeQuery.setParameter("name", name);
+	        nativeQuery.setParameter("city", city);
 	        nativeQuery.setFirstResult((int) offset);
 	        nativeQuery.setMaxResults((int) limit);
-	        List<BankBranches> resultList = nativeQuery.getResultList();
+	        @SuppressWarnings("unchecked")
+			List<BankBranches> resultList = nativeQuery.getResultList();
 	        System.out.println(resultList);
 	        return resultList;
 		}
